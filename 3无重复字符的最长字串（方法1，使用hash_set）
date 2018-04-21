@@ -1,0 +1,51 @@
+#include <iostream>
+#include <hash_set>
+
+using namespace stdext;
+using namespace std;
+class Solution {
+public:
+	int lengthOfLongestSubstring(string s) {
+		int nLen = 0, maxLen = 0;
+		nLen = s.size();
+		for(int i = 0; i < nLen; i++)
+		{
+			for(int j = i+1; j<=nLen;j++)
+			{
+				if(isUnique(s,i,j))
+				{
+					maxLen = maxLen < (j-i)?(j-i):maxLen; 
+				}
+				else
+					break;
+			}
+		}
+		return maxLen;
+	}
+
+	bool isUnique(const string &s, int start, int end)
+	{
+		hash_set<char> charSet;
+		for(int i = start; i< end; i++)
+		{
+			if(charSet.find(s[i]) != charSet.end())
+			{
+				return false;
+			}
+			charSet.insert(s[i]);
+		}
+		return true;
+	}
+
+	
+};
+
+int main()
+{
+	Solution ss;
+	string s = "pwwkew";
+	int tt = ss.lengthOfLongestSubstring(s);
+	cout << tt;
+	system("pause");
+	return 0;
+}
