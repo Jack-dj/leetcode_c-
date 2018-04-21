@@ -1,0 +1,29 @@
+#include <iostream>
+#include <hash_set>
+using namespace std;
+class Solution {
+public:
+	int lengthOfLongestSubstring(string s) {
+		if (s.length() == 0) return 0;
+		string str=s.substr(0,1);                  //current longest substring
+		int max = str.length();                    // find the max length
+		for (int i = 1; i < s.length(); i++){
+			int pos = str.find_first_of(s[i]);     //return position if s[i] in str or -1 otherwise
+			str += s.substr(i,1);                         
+			if (pos>=0)
+				str = str.substr(pos+1, str.length()-pos); 
+			if (max < str.length())
+				max = str.length();
+		}
+		return max;
+	}
+};
+int main()
+{
+	Solution ss;
+	string s = "asadsdasd";
+	int tt = ss.lengthOfLongestSubstring(s);
+	cout << tt;
+	system("pause");
+	return 0;
+}
