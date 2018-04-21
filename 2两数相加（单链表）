@@ -1,0 +1,93 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+typedef struct ListNode
+{
+	int val;
+	ListNode *next;
+	//ListNode(int x : val(x), next(NULL)) {}
+}ListNode;
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+	{
+		ListNode *res = NULL;
+		if(l1 == NULL && l2 == NULL)
+			return res;
+		res = (ListNode *)malloc(sizeof(ListNode));
+		ListNode *lisp = res;
+		int value = 0;
+		int varin = 0;
+		lisp->val = 0;
+		lisp->next = NULL;
+		while(l1!=NULL ||l2 != NULL || varin != 0)
+		{
+			value = ((l1 == NULL)?0:l1->val) + ((l2 == NULL)?0:l2->val) + varin;
+			varin = 0;
+			if(value >= 10)
+			{
+				varin = value / 10;
+				value = value % 10;
+			}
+			lisp->val = value;
+			l1 = (l1 == NULL) ? l1:l1->next;
+			l2 = (l2 == NULL) ? l2:l2->next;
+			if(l1!=NULL ||l2 != NULL || varin != 0)
+			{
+				lisp->next = (ListNode *)malloc(sizeof(ListNode));
+				lisp = lisp->next;
+			}	
+		}
+		lisp->next = NULL;
+		return res;
+    }		
+};
+
+int main()
+{
+	ListNode *l1,*l2,*res,*l1p, *l2p;
+	l1 = (ListNode*)malloc(sizeof(ListNode));
+	l2 = (ListNode*)malloc(sizeof(ListNode));
+	l1p = l1;
+	l2p = l2;
+	res = (ListNode*)malloc(sizeof(ListNode));
+	Solution s;
+	for(int i = 0; i<3; i++)
+	{
+		cin >> l1p->val;
+		if(i != 2)
+		{
+			l1p->next = (ListNode*)malloc(sizeof(ListNode));
+			l1p = l1p->next;
+		}
+	}
+	for(int i = 0; i<3;i++)
+	{
+		cin >> l2p->val;
+		if(i != 2)
+		{
+			l2p->next = (ListNode*)malloc(sizeof(ListNode));
+			l2p = l2p->next;
+		}
+		
+	}
+	l1p->next = NULL;
+	l2p->next = NULL;
+	res = s.addTwoNumbers(l1,l2);
+	int result[10] = {0};
+	int it = 0;
+	while(res != NULL)
+	{
+		result[it] = res->val;
+		res = res->next;
+		it++;
+	}
+	int flag = it -1;
+	for(flag; flag>=0; flag--)
+	{
+		cout << result[flag];
+	}
+	cout << endl;
+	system("pause");
+	return 0;
+}
