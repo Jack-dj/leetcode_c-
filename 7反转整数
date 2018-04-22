@@ -1,0 +1,25 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+class Solution {
+public:
+	int reverse(int x) {
+		long long res = 0;
+		while(x)
+		{
+			res = 10 * res + x % 10;
+			x = x / 10;
+		}
+		if(res < INT_MIN || res > INT_MAX)
+			return 0;
+		return res;
+	}
+};
+int main()
+{
+	Solution ss;
+	int sum = ss.reverse(-2147483648);
+	cout << sum << endl;
+	system("pause");
+	return 0;
+}
