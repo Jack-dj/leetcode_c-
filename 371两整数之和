@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+class Solution {
+public:
+	int getSum(int a, int b) {
+		while(a)
+		{
+			int tmp = (a&b)<<1;
+			b = a^b;
+			a = tmp;
+		}
+		return b;
+	}
+};
+int main()
+{
+	Solution ss;
+	int sum = ss.getSum(1,2);
+	cout << sum << endl;
+	system("pause");
+	return 0;
+}
