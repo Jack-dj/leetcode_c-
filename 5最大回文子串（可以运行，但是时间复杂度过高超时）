@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Solution {
+public:
+	//不断循环遍历（复杂度高）
+	string longestPalindrome(string s) {
+		string temp,res;
+		int len = s.length();
+		int maxLen = 0;//最大回文子串长度
+		for(int i = 0; i < len; i++)
+		{
+			temp = "";
+			for(int j = i; j < len; j++)
+			{
+				temp = temp + s[j];
+				if(findIs(temp))
+				{
+					if(temp.length()>maxLen)
+					{
+						maxLen = temp.length();
+						res = temp;
+					}
+				}
+			}
+		}
+		return res;
+	}
+
+	int findIs(string s)
+	{
+		for(int i = 0; i < s.length(); i++)
+		{
+			if(s.at(i) != s.at(s.length()-i-1))
+				return 0;
+		}
+		return 1;
+	}
+};
+int main()
+{
+	string s = "flsuqzhtcahnyickkgtfnlyzwjuiwqiexthpzvcweqzeqpmqwkydhsfipcdrsjkefehhesubkirhalgnevjugfohwnlhbjfewiunlgmomxkafuuokesvfmcnvseixkkzekuinmcbmttzgsqeqbrtlwyqgiquyylaswlgfflrezaxtjobltcnpjsaslyviviosxorjsfncqirsjpkgajkfpoxxmvsyynbbovieoothpjgncfwcvpkvjcmrcuoronrfjcppbisqbzkgpnycqljpjlgeciaqrnqyxzedzkqpqsszovkgtcgxqgkflpmrikksaupukdvkzbltvefitdegnlmzeirotrfeaueqpzppnsjpspgomyezrlxsqlfcjrkglyvzvqakhtvfmeootbtbwfhqucbnuwznigoyatvkocqmbtqghybwrhmyvvuchjpvjckiryvjfxabezchynfxnpqaeampvaapgmvoylyutymdhvhqfmrlmzkhuhupizqiujpwzarnszrexpvgdmtoxvjygjpmiadzdcxtggwamkbwrkeplesupagievwsaaletcuxtpsxmbmeztcylsjxvhzrqizdmgjfyftpzpgxateopwvynljzffszkzzqgofdlwyknqfruhdkvmvrrjpijcjomnrjjubfccaypkpfokohvkqndptciqqiscvmpozlyyrwobeuazsawtimnawquogrohcrnmexiwvjxgwhmtpykqlcfacuadyhaotmmxevqwarppknoxthsmrrknu";
+	Solution ss;
+	s = ss.longestPalindrome(s);
+	cout << s << endl;
+	system("pause");
+	return 0;
+}
